@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM public.ecr.aws/lambda/python:3.9
+FROM python:3.9-slim
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -8,6 +8,7 @@ WORKDIR /app
 
 # Copy the requirements file into the container at /app
 COPY requirements.txt /app/
+COPY gunicorn-cfg.py /app/
 
 # COPY deployments ./app/deployments/
 

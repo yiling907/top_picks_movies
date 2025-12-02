@@ -1,13 +1,13 @@
 version: "3.9"
 services:
   web:
-    image: joelwembo/django-app-ecr-repo
-    container_name: django-app-ecr-repo
-    env_file: env
+    image: top_picks_movies
+    container_name: top_picks_movies
+    env_file: .env
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     command:
       - /bin/sh
       - -c
