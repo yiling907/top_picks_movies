@@ -2,7 +2,7 @@ locals {
   bucket_name = "django-music-ecs-ecr-terraform-1"
   table_name  = "django-music-ecs-ecr-terraform-1"
 
-  ecr_repo_name = "django--music-app-ecr-repo"
+  ecr_repo_name = "django-music-app-ecr-repo"
 
   music_app_cluster_name        = "django-music-app-cluster"
   availability_zones           = ["us-east-1a", "us-east-1b", "us-east-1c"]
