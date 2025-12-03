@@ -1,4 +1,4 @@
-resource "aws_ecr_repository" "music_app_ecr_repo" {
+resource "aws_ecr_repository" "movie_app_ecr_repo" {
   name = var.ecr_repo_name
 }
 
@@ -8,9 +8,9 @@ variable "ecr_repo_name" {
 }
 
 output "repository_url" {
-  value = aws_ecr_repository.music_app_ecr_repo.repository_url
+  value = aws_ecr_repository.movie_app_ecr_repo.repository_url
 }
 
 output "repository_url_e" {
-  value = aws_ecr_repository.music_app_ecr_repo
+  value = aws_ecr_repository.movie_app_ecr_repo
 }

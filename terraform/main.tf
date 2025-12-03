@@ -19,16 +19,16 @@ module "ecrRepo" {
 module "ecsCluster" {
   source = "./ecs"
 
-  music_app_cluster_name = local.music_app_cluster_name
+  movie_app_cluster_name = local.movie_app_cluster_name
   availability_zones    = local.availability_zones
 
-  music_app_task_famliy         = local.music_app_task_famliy
+  movie_app_task_famliy         = local.movie_app_task_famliy
   ecr_repo_url                 = module.ecrRepo.repository_url
   container_port               = local.container_port
-  music_app_task_name           = local.music_app_task_name
+  movie_app_task_name           = local.movie_app_task_name
   ecs_task_execution_role_name = local.ecs_task_execution_role_name
 
   application_load_balancer_name = local.application_load_balancer_name
   target_group_name              = local.target_group_name
-  music_app_service_name          = local.music_app_service_name
+  movie_app_service_name          = local.movie_app_service_name
 }

@@ -1,4 +1,4 @@
-variable "music_app_cluster_name" {
+variable "movie_app_cluster_name" {
   description = "ECS Cluster Name"
   type        = string
 }
@@ -8,7 +8,7 @@ variable "availability_zones" {
   type        = list(string)
 }
 
-variable "music_app_task_famliy" {
+variable "movie_app_task_famliy" {
   description = "ECS Task Family"
   type        = string
 }
@@ -23,7 +23,7 @@ variable "container_port" {
   type        = number
 }
 
-variable "music_app_task_name" {
+variable "movie_app_task_name" {
   description = "ECS Task Name"
   type        = string
 }
@@ -43,7 +43,7 @@ variable "target_group_name" {
   type        = string
 }
 
-variable "music_app_service_name" {
+variable "movie_app_service_name" {
   description = "ECS Service Name"
   type        = string
 }

@@ -1,5 +1,5 @@
-resource "aws_ecs_cluster" "music_app_cluster" {
-  name = var.music_app_cluster_name
+resource "aws_ecs_cluster" "movie_app_cluster" {
+  name = var.movie_app_cluster_name
 }
 
 resource "aws_default_vpc" "default_vpc" {}
@@ -16,12 +16,12 @@ resource "aws_default_subnet" "default_subnet_c" {
   availability_zone = var.availability_zones[2]
 }
 
-resource "aws_ecs_task_definition" "music_app_task" {
-  family                   = var.music_app_task_famliy
+resource "aws_ecs_task_definition" "movie_app_task" {
+  family                   = var.movie_app_task_famliy
   container_definitions    = <<DEFINITION
   [
     {
-      "name": "${var.music_app_task_name}",
+      "name": "${var.movie_app_task_name}",
       "image": "${var.ecr_repo_url}",
       "essential": true,
       "portMappings": [
@@ -106,16 +106,16 @@ resource "aws_lb_listener" "listener" {
   }
 }
 
-resource "aws_ecs_service" "music_app_service" {
-  name            = var.music_app_service_name
-  cluster         = aws_ecs_cluster.music_app_cluster.id
-  task_definition = aws_ecs_task_definition.music_app_task.arn
+resource "aws_ecs_service" "movie_app_service" {
+  name            = var.movie_app_service_name
+  cluster         = aws_ecs_cluster.movie_app_cluster.id
+  task_definition = aws_ecs_task_definition.movie_app_task.arn
   launch_type     = "FARGATE"
   desired_count   = 1
 
   load_balancer {
     target_group_arn = aws_lb_target_group.target_group.arn
-    container_name   = aws_ecs_task_definition.music_app_task.family
+    container_name   = aws_ecs_task_definition.movie_app_task.family
     container_port   = var.container_port
   }
 
