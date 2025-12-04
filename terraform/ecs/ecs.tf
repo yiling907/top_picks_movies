@@ -18,30 +18,29 @@ resource "aws_default_subnet" "default_subnet_c" {
 
 resource "aws_ecs_task_definition" "movie_app_task" {
   family                   = var.movie_app_task_famliy
-  container_definitions    = <<DEFINITION
-  [
+  container_definitions    = jsonencode([
     {
-      "name": "${var.movie_app_task_name}",
-      "image": "${var.ecr_repo_url}",
-      "essential": true,
-      "logConfiguration": {
-              "logDriver": "awslogs"
-              "options" : {
-                "awslogs-group"         : ${var.log_group_name}
-                "awslogs-stream-prefix" : ${var.log_group_name_prefix}
-              }
-            },
-      "portMappings": [
-        {
-          "containerPort": ${var.container_port},
-          "hostPort": ${var.container_port}
+      name      = var.movie_app_task_name
+      image     = var.ecr_repo_url
+      essential = true
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = var.log_group_name
+          awslogs-stream-prefix = var.log_group_name_prefix
         }
-      ],
-      "memory": 512,
-      "cpu": 256
+      }
+      portMappings = [
+        {
+          containerPort = var.container_port
+          hostPort      = var.container_port
+          protocol      = "tcp"
+        }
+      ]
+      memory = 512
+      cpu    = 256
     }
-  ]
-  DEFINITION
+  ])
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   memory                   = 512
