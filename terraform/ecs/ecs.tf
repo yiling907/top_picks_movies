@@ -24,11 +24,11 @@ resource "aws_ecs_task_definition" "movie_app_task" {
       "name": "${var.movie_app_task_name}",
       "image": "${var.ecr_repo_url}",
       "essential": true,
-      "logConfiguration" = {
-              logDriver = "awslogs"
-              options = {
-                "awslogs-group"         = ${var.log_group_name}
-                "awslogs-stream-prefix" = ${var.log_group_name_prefix}
+      "logConfiguration": {
+              "logDriver": "awslogs"
+              "options" : {
+                "awslogs-group"         : ${var.log_group_name}
+                "awslogs-stream-prefix" : ${var.log_group_name_prefix}
               }
             },
       "portMappings": [
