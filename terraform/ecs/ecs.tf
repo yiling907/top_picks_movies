@@ -21,16 +21,8 @@ resource "aws_ecs_task_definition" "movie_app_task" {
   container_definitions    = jsonencode([
     {
       name      = var.movie_app_task_name
-      image     = var.ecr_repo_url
+      image     = "${var.ecr_repo_url}:latest"
       essential = true
-      logConfiguration = {
-        logDriver = "awslogs"
-        options = {
-          awslogs-group         = var.log_group_name
-          awslogs-region        = data.aws_region.current.name
-          awslogs-stream-prefix = var.log_group_name_prefix
-        }
-      }
       portMappings = [
         {
           containerPort = var.container_port
