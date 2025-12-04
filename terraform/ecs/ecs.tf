@@ -27,6 +27,7 @@ resource "aws_ecs_task_definition" "movie_app_task" {
         logDriver = "awslogs"
         options = {
           awslogs-group         = var.log_group_name
+          awslogs-region        = data.aws_region.current.name
           awslogs-stream-prefix = var.log_group_name_prefix
         }
       }
@@ -39,6 +40,13 @@ resource "aws_ecs_task_definition" "movie_app_task" {
       ]
       memory = 512
       cpu    = 256
+      healthCheck = {
+        command     = ["CMD-SHELL", "curl -f http://localhost:${var.container_port}/health || exit 1"],
+        interval    = 30,        
+        timeout     = 5,         
+        retries     = 3,         
+        startPeriod = 60         
+      }
     }
   ])
   requires_compatibilities = ["FARGATE"]
