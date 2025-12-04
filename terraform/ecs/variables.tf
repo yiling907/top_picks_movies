@@ -47,3 +47,13 @@ variable "movie_app_service_name" {
   description = "ECS Service Name"
   type        = string
 }
+
+variable "log_group_name" {
+  description = "ECS Log Group Name"
+  type        = string
+}
+
+variable "log_group_name_prefix" {
+  description = "ECS Log Group Name Prefix"
+  type        = string
+}

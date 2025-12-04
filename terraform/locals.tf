@@ -15,4 +15,6 @@ locals {
   target_group_name              = "django-movie-alb-tg"
 
   movie_app_service_name = "django-movie-app-service"
+
+  cluster_log_group = "django-movie-app-cluster-group"
 }

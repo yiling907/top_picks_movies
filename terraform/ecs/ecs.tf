@@ -24,6 +24,13 @@ resource "aws_ecs_task_definition" "movie_app_task" {
       "name": "${var.movie_app_task_name}",
       "image": "${var.ecr_repo_url}",
       "essential": true,
+      "logConfiguration" = {
+              logDriver = "awslogs"
+              options = {
+                "awslogs-group"         = ${var.log_group_name}
+                "awslogs-stream-prefix" = ${var.log_group_name_prefix}
+              }
+            },
       "portMappings": [
         {
           "containerPort": ${var.container_port},
@@ -65,15 +72,15 @@ resource "aws_alb" "application_load_balancer" {
 
 resource "aws_security_group" "load_balancer_security_group" {
   ingress {
-    description= "entry port"
+    description = "entry port"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-   ingress {
-    description= "django port"
+  ingress {
+    description = "django port"
     from_port   = 8000
     to_port     = 8000
     protocol    = "tcp"

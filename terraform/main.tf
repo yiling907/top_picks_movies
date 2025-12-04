@@ -16,6 +16,12 @@ module "ecrRepo" {
   ecr_repo_name = local.ecr_repo_name
 }
 
+module "cloudWatch" {
+  source = "./log"
+
+  django_movie_cluster_log_group=local.cluster_log_group
+}
+
 module "ecsCluster" {
   source = "./ecs"
 
@@ -31,4 +37,7 @@ module "ecsCluster" {
   application_load_balancer_name = local.application_load_balancer_name
   target_group_name              = local.target_group_name
   movie_app_service_name          = local.movie_app_service_name
+
+  log_group_name=module.cloudWatch.log_group_name
+  log_group_name_prefix=module.cloudWatch.log_group_name_prefix
 }
